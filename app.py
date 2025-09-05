@@ -3,6 +3,7 @@ import os
 from flask import Flask, request, jsonify
 import dash
 from dash import dcc, html, dash_table
+from flask_cors import CORS
 
 # --------------------------
 # Flask backend for API
@@ -52,6 +53,7 @@ def leaderboard():
 # Dash frontend
 # --------------------------
 app = dash.Dash(__name__, server=server, url_base_pathname="/")
+CORS(app)
 
 app.layout = html.Div([
     html.H1("🏆 Top 10 Leaderboard"),
