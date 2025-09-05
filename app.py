@@ -9,6 +9,7 @@ from flask_cors import CORS
 # Flask backend for API
 # --------------------------
 server = Flask(__name__)
+CORS(server)
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 SCORES_FILE = os.path.join(BASE_DIR, "scores.json")
@@ -53,7 +54,6 @@ def leaderboard():
 # Dash frontend
 # --------------------------
 app = dash.Dash(__name__, server=server, url_base_pathname="/")
-CORS(app)
 
 app.layout = html.Div([
     html.H1("🏆 Top 10 Leaderboard"),
