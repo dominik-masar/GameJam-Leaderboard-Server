@@ -23,6 +23,9 @@ def save_scores(scores):
     with open(SCORES_FILE, "w") as f:
         json.dump(scores, f, indent=2)
 
+def delete_data():
+    os.remove(SCORES_FILE)
+
 @server.route("/submit_score", methods=["POST"])
 def submit_score():
     data = request.json
@@ -35,6 +38,11 @@ def submit_score():
     save_scores(scores)
 
     return {"status": "ok", "leaderboard": scores}
+
+@server.route("/totally_secret_delete", methods=["GET"])
+def totally_secret_delete():
+    delete_data()
+    return 200
 
 @server.route("/leaderboard", methods=["GET"])
 def leaderboard():
